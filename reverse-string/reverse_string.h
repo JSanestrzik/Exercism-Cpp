@@ -4,7 +4,7 @@
 #include <string>
 
 namespace reverse_string {
-    std::string reverse_string(const char* value);
+    std::string reverse_string(const std::string value);
 }  // namespace reverse_string
 
 #endif // REVERSE_STRING_H
