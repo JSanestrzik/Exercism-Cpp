@@ -2,8 +2,8 @@
 #include <algorithm>
 
 namespace reverse_string {
-    std::string reverse_string(std::string value) {
-        std::reverse(value.begin(), value.end());
-        return value;
+    std::string reverse_string(const std::string& value) {
+        std::string revVal(value.rbegin(), value.rend());
+        return  revVal;
     }
 }  // namespace reverse_string
