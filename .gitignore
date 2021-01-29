@@ -5,6 +5,9 @@
 cmake-build-debug/
 build/
 
+#indexing
+.DS_Store
+
 # Prerequisites
 *.d
 
