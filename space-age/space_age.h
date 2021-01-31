@@ -6,17 +6,50 @@
 namespace space_age {
     class space_age {
     public:
-        space_age(long seconds);
+        explicit space_age(long seconds);
 
         long seconds() const;
-        double on_mercury()const;
-        double on_venus() const;
-        double on_earth() const;
-        double on_mars() const;
-        double on_jupiter() const;
-        double on_saturn() const;
-        double on_uranus() const;
-        double on_neptune() const;
+
+        constexpr double on_mercury() const
+        {
+            return  on_earth() / mEarthMercuryFactor;
+        };
+
+        constexpr double on_venus() const
+        {
+            return on_earth() / mEarthVenusFactor;
+        };
+
+        constexpr double on_earth() const
+        {
+            return (double)mSeconds/mEarthYearSeconds;
+        };
+
+        constexpr double on_mars() const
+        {
+            return on_earth() / mEarthMarssFactor;
+        };
+
+        constexpr double on_jupiter() const
+        {
+            return on_earth() / mEarthJupiterFactor;
+        };
+
+        constexpr double on_saturn() const
+        {
+            return on_earth() / mEarthSaturnFactor;
+        };
+
+        constexpr double on_uranus() const
+        {
+            return on_earth() / mEarthUranusFactor;
+        };
+
+        constexpr double on_neptune() const
+        {
+            return on_earth() / mEarthNeptuneFactor;
+        };
+
     private:
         long mSeconds;
 
