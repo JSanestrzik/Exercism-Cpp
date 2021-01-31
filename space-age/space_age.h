@@ -6,9 +6,11 @@
 namespace space_age {
     class space_age {
     public:
-        explicit space_age(long seconds);
+        constexpr explicit space_age(long seconds): mSeconds(seconds) {};
 
-        long seconds() const;
+        constexpr long seconds() const {
+            return mSeconds;
+        }
 
         constexpr double on_mercury() const
         {
@@ -51,8 +53,7 @@ namespace space_age {
         };
 
     private:
-        long mSeconds;
-
+        const long mSeconds;
         const double mEarthYearSeconds = 31557600;
         const double mEarthMarssFactor = 1.8808158;
         const double mEarthMercuryFactor = 0.2408467;
