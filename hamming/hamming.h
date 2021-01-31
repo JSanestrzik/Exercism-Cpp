@@ -3,7 +3,7 @@
 #include <string>
 
 namespace hamming {
-    int compute(std::string lhs, std::string rhs) throw(std::domain_error);
+    std::string::size_type compute(const std::string& lhs, const std::string& rhs);
 }  // namespace hamming
 
 #endif // HAMMING_H

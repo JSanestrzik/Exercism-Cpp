@@ -4,18 +4,18 @@
 
 namespace hamming {
 
-    int compute(std::string lhs, std::string rhs) throw(std::domain_error)
+    std::string::size_type compute(const std::string& lhs, const std::string& rhs)
     {
         if (lhs.length() != rhs.length())
         {
             throw std::domain_error("DNA strands differ in length");
         }
 
-        int hammingDst = 0;
+        std::string::size_type hammingDst = 0;
 
-        for (auto it = lhs.begin(); it < lhs.end(); it++)
+        for (auto itLhs = lhs.begin(), itRhs = rhs.begin(); itLhs != lhs.end(); ++itLhs, ++itRhs)
         {
-            if (*it != rhs[std::distance(lhs.begin(), it)])
+            if (*itLhs != *itRhs)
             {
                 hammingDst++;
             }
