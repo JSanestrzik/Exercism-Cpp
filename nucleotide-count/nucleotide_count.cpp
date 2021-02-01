@@ -8,8 +8,7 @@
 namespace nucleotide_count {
 
     counter::counter(const std::string_view& dna): mDna(dna) {
-        std::function<bool(const char)> fn = std::bind(&counter::validateNucleotidValue, this, std::placeholders::_1);
-        if (std::find_if(dna.begin(), dna.end(), std::not1(fn)) != dna.end()) {
+        if (std::find_if(dna.begin(), dna.end(), [this](const char n) { return !validateNucleotidValue(n); }) != dna.end()) {
             throw std::invalid_argument("Invalid dna value.");
         }
     };
