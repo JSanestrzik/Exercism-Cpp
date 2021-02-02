@@ -5,8 +5,6 @@
 #include <algorithm>
 #include <numeric>
 
-#include <iostream>
-
 namespace triangle {
     flavor kind(double a, double b, double c) {
         std::array<double, 3> values{a, b, c};
