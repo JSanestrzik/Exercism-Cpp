@@ -9,7 +9,7 @@ namespace triangle {
         scalene
     };
 
-    constexpr flavor kind(double a, double b, double c);
+    flavor kind(double a, double b, double c, double rel_epsilon = 0.001, double abs_epsilon = 0.001);
 }  // namespace triangle
 
 #endif // TRIANGLE_H
