@@ -2,8 +2,6 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include <iostream>
-
 namespace triangle {
 
     flavor kind(double a, double b, double c, double rel_epsilon, double abs_epsilon) {
@@ -27,9 +25,9 @@ namespace triangle {
         };
 
         int equal_sides =
-                (int)isEqual(a, b) +
-                (int)isEqual(b, c) +
-                (int)isEqual(a, c);
+                isEqual(a, b) +
+                isEqual(b, c) +
+                isEqual(a, c);
 
         switch (equal_sides) {
             case 3:
