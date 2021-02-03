@@ -1,38 +1,32 @@
 #include "triangle.h"
-
-#include <map>
-#include <array>
 #include <algorithm>
-#include <numeric>
 
 namespace triangle {
-    flavor kind(double a, double b, double c) {
-        std::array<double, 3> values{a, b, c};
-        std::sort(values.begin(), values.end());
 
-        if (std::find_if(values.begin(), values.end(),[](double v){ return v <= 0; }) != values.end()) {
+    flavor kind(double a, double b, double c) {
+        if ( a <= 0 || b <= 0 || c <= 0 ) {
             throw std::domain_error("Triangle side can't be zero or negative");
         }
 
-        double shortSidesSum = std::accumulate(values.begin(), values.end() -1, 0.0);
-        double longSide = values.back();
+        double shortSide1 = std::min(a, b);
+        double shortSide2 = std::min(b, c);
+        double longSide = std::max(a, std::max(b, c));
 
-        if (shortSidesSum < longSide) {
+        if ((shortSide1 + shortSide2) < longSide) {
             throw std::domain_error("Invalid triangle side values");
         }
 
-        std::map<double, int> sides;
-        for (double val : values) {
-            sides[val]++;
-        }
+        auto isEqual = [](double x, double y) -> bool {
+            return std::abs(x - y) <= std::numeric_limits<double>::epsilon() * std::abs(x);
+        };
 
-        switch (sides.size()) {
-            case 3:
-                return flavor::scalene;
-            case 2:
-                return flavor::isosceles;
-            default:
-                return flavor::equilateral;
+        if (isEqual(shortSide1, shortSide2) && isEqual(shortSide1, longSide) && isEqual(shortSide2, longSide)) {
+            return  flavor::equilateral;
+        } else if (isEqual(shortSide1, shortSide2) || isEqual(shortSide1, longSide) || isEqual(shortSide2, longSide)) {
+            return flavor::isosceles;
+        } else {
+            return flavor::scalene;
         }
     }
+
 }  // namespace triangle

@@ -1,6 +1,8 @@
 #if !defined(TRIANGLE_H)
 #define TRIANGLE_H
 
+#define EXERCISM_RUN_ALL_TESTS
+
 namespace triangle {
 
     enum class flavor {
