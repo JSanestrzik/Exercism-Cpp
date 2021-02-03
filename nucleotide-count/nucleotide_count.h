@@ -4,15 +4,25 @@
 #include <string>
 #include <map>
 
-#define EXERCISM_RUN_ALL_TESTS
-
 namespace nucleotide_count {
     class counter {
     public:
-        counter(const std::string_view& dna);
+        constexpr counter(const std::string_view& dna): mDna(dna) {
+            if (std::find_if(dna.begin(), dna.end(), [this](const char n) { return !validateNucleotidValue(n); }) != dna.end()) {
+                throw std::invalid_argument("Invalid dna value.");
+            }
+        };
 
         std::map<char, int> nucleotide_counts() const;
-        int count(const char nucleotide) const;
+
+        constexpr int count(const char nucleotide) const {
+            if (!validateNucleotidValue(nucleotide))
+            {
+                throw std::invalid_argument("Invalid nucleotide value.");
+            }
+
+            return std::count(mDna.begin(), mDna.end(), nucleotide);
+        };
 
     private:
         const std::string_view mDna;
@@ -22,7 +32,12 @@ namespace nucleotide_count {
         const char mCytosineKey = 'C';
         const char mAdenineKey = 'A';
 
-        bool validateNucleotidValue(const char nucleotid) const;
+        constexpr bool validateNucleotidValue(const char nucleotid) const {
+            return nucleotid == mAdenineKey ||
+                   nucleotid == mThymineKey ||
+                   nucleotid == mCytosineKey ||
+                   nucleotid == mGuanineKey;
+        };
     };
 }  // namespace nucleotide_count
 
