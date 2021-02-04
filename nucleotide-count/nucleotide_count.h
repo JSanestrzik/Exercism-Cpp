@@ -10,7 +10,7 @@ namespace nucleotide_count {
         counter(const std::string_view& dna);
 
         std::map<char, int> nucleotide_counts() const;
-        int count(const char nucleotide) const;
+        int count(char nucleotide) const;
 
     private:
         std::map<char, int> mNucleotideCounts;
@@ -20,7 +20,8 @@ namespace nucleotide_count {
         const char mCytosineKey = 'C';
         const char mAdenineKey = 'A';
 
-        bool validateNucleotideValue(const char nucleotid);
+        bool validateNucleotideValue(const char nucleotid) const;
+        void count_nucleotides(const std::string_view& dna);
     };
 }  // namespace nucleotide_count
 

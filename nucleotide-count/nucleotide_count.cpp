@@ -2,29 +2,56 @@
 
 namespace nucleotide_count {
 
-    counter::counter(const std::string_view& dna) {
-        if (std::find_if(dna.begin(), dna.end(), [this](const char n) { return !validateNucleotidValue(n); }) != dna.end()) {
+    counter::counter(const std::string_view& dna): mNucleotideCounts() {
+        if (std::find_if(dna.begin(), dna.end(), [this](const char n) { return !validateNucleotideValue(n); }) != dna.end()) {
             throw std::invalid_argument("Invalid dna value.");
         }
 
-        for (char n : dna) {
-            mNucleotideCounts[n]++;
-        }
+        count_nucleotides(dna);
     };
 
     std::map<char, int> counter::nucleotide_counts() const {
         return mNucleotideCounts;
     };
 
-    int counter::count(const char nucleotide) const {
-        return mNucleotideCounts[nucleotide];
+    int counter::count(char nucleotide) const {
+        if (validateNucleotideValue(nucleotide)) {
+            return mNucleotideCounts.at(nucleotide);
+        } else {
+            throw std::invalid_argument("Invalid nucleotide value.");
+        }
     };
 
-    constexpr bool counter::validateNucleotideValue(const char nucleotid) {
-        return nucleotid == mAdenineKey ||
-               nucleotid == mThymineKey ||
-               nucleotid == mCytosineKey ||
-               nucleotid == mGuanineKey;
+    bool counter::validateNucleotideValue(const char nucleotide) const {
+        return nucleotide == mAdenineKey ||
+               nucleotide == mThymineKey ||
+               nucleotide == mCytosineKey ||
+               nucleotide == mGuanineKey;
     };
+
+    void counter::count_nucleotides(const std::string_view& dna) {
+        int aCount = 0, cCount = 0, tCount = 0, gCount = 0;
+
+        for (char it : dna)
+        {
+            if (it == mAdenineKey) {
+                aCount++;
+            }
+            if (it == mThymineKey) {
+                tCount++;
+            }
+            if (it == mCytosineKey) {
+                cCount++;
+            }
+            if (it == mGuanineKey) {
+                gCount++;
+            }
+        }
+
+        mNucleotideCounts.emplace(mAdenineKey, aCount);
+        mNucleotideCounts.emplace(mThymineKey, tCount);
+        mNucleotideCounts.emplace(mCytosineKey, cCount);
+        mNucleotideCounts.emplace(mGuanineKey, gCount);
+    }
 
 }  // namespace nucleotide_count
