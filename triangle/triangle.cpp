@@ -17,10 +17,8 @@ namespace triangle {
             return diff <= largest * rel_epsilon;
         };
 
-        double s1 = std::min(a, b);
-        double s2 = std::min(b, c);
-        double shortSidesSum = s1 + (isEqual(s1, s2) ? std::min(a, c) : s2);
         double longSide = std::max({a, b, c});
+        double shortSidesSum = a + b + c - longSide;
 
         if (shortSidesSum < longSide) {
             throw std::domain_error("Invalid triangle side values");
