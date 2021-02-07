@@ -4,24 +4,26 @@
 #include <string>
 #include <map>
 
+#define EXERCISM_RUN_ALL_TESTS
+
 namespace nucleotide_count {
     class counter {
     public:
-        counter(const std::string_view& dna);
+        explicit counter(const std::string_view dna);
 
         std::map<char, int> nucleotide_counts() const;
         int count(char nucleotide) const;
 
     private:
-        std::map<char, int> mNucleotideCounts;
+        const std::map<char, int> mNucleotideCounts;
 
-        const char mThymineKey = 'T';
-        const char mGuanineKey = 'G';
-        const char mCytosineKey = 'C';
-        const char mAdenineKey = 'A';
+        static const char mThymineKey = 'T';
+        static const char mGuanineKey = 'G';
+        static const char mCytosineKey = 'C';
+        static const char mAdenineKey = 'A';
 
-        bool validateNucleotideValue(const char nucleotid) const;
-        void count_nucleotides(const std::string_view& dna);
+        static bool validateNucleotideValue(const char nucleotid);
+        void count_nucleotides(const std::string_view dna);
     };
 }  // namespace nucleotide_count
 
