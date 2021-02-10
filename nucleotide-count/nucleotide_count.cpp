@@ -3,34 +3,33 @@
 
 namespace nucleotide_count {
 
+    const char counter::mAdenineKey = 'A';
+    const char counter::mThymineKey = 'T';
+    const char counter::mGuanineKey = 'G';
+    const char counter::mCytosineKey = 'C';
+
     counter::counter(const std::string_view dna): mNucleotideCounts() {
-        if (std::all_of(dna.begin(), dna.end(), &counter::validateNucleotideValue)) {
-            
-        }
-        if (std::all_of(dna.begin(), dna.end(), [](const char n) { return !validateNucleotideValue(n); }) != dna.end()) {
-            throw std::invalid_argument("Invalid dna value.");
-        }
+        std::for_each(dna.begin(), dna.end(), &counter::validate_nucleotide);
 
         count_nucleotides(dna);
     };
 
-    std::map<char, int> counter::nucleotide_counts() const {
+    const std::map<char, int>& counter::nucleotide_counts() const {
         return mNucleotideCounts;
     };
 
     int counter::count(char nucleotide) const {
-        if (validateNucleotideValue(nucleotide)) {
-            return mNucleotideCounts.at(nucleotide);
-        } else {
-            throw std::invalid_argument("Invalid nucleotide value.");
-        }
+        validate_nucleotide(nucleotide);
+        return mNucleotideCounts.at(nucleotide);
     };
 
-    static bool counter::validateNucleotideValue(const char nucleotide) {
-        return nucleotide == mAdenineKey ||
-               nucleotide == mThymineKey ||
-               nucleotide == mCytosineKey ||
-               nucleotide == mGuanineKey;
+    void counter::validate_nucleotide(const char nucleotide) {
+        if (nucleotide != counter::mAdenineKey &&
+            nucleotide != counter::mThymineKey &&
+            nucleotide != counter::mCytosineKey &&
+            nucleotide != counter::mGuanineKey) {
+            throw std::invalid_argument("Invalid nucleotide value");
+        }
     };
 
     void counter::count_nucleotides(const std::string_view dna) {
@@ -52,10 +51,12 @@ namespace nucleotide_count {
             }
         }
 
-        mNucleotideCounts = {{mAdenineKey, aCount},
-                             {mCytosineKey, cCount},
-                             {mThymineKey, tCount},
-                             {mGuanineKey, gCount}};
+        mNucleotideCounts = {
+                {mAdenineKey, aCount},
+                {mCytosineKey, cCount},
+                {mThymineKey, tCount},
+                {mGuanineKey, gCount}
+        };
     }
 
 }  // namespace nucleotide_count

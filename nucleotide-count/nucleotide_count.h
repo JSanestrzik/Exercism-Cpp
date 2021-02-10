@@ -11,18 +11,18 @@ namespace nucleotide_count {
     public:
         explicit counter(const std::string_view dna);
 
-        std::map<char, int> nucleotide_counts() const;
+        const std::map<char, int>& nucleotide_counts() const;
         int count(char nucleotide) const;
 
     private:
-        const std::map<char, int> mNucleotideCounts;
+        std::map<char, int> mNucleotideCounts;
 
-        static const char mThymineKey = 'T';
-        static const char mGuanineKey = 'G';
-        static const char mCytosineKey = 'C';
-        static const char mAdenineKey = 'A';
+        static const char mThymineKey;
+        static const char mGuanineKey;
+        static const char mCytosineKey;
+        static const char mAdenineKey;
 
-        static bool validateNucleotideValue(const char nucleotid);
+        static void validate_nucleotide(const char nucleotid);
         void count_nucleotides(const std::string_view dna);
     };
 }  // namespace nucleotide_count
