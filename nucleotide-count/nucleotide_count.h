@@ -1,10 +1,7 @@
 #if !defined(NUCLEOTIDE_COUNT_H)
 #define NUCLEOTIDE_COUNT_H
-
 #include <string>
 #include <map>
-
-#define EXERCISM_RUN_ALL_TESTS
 
 namespace nucleotide_count {
     class counter {
@@ -16,11 +13,6 @@ namespace nucleotide_count {
 
     private:
         std::map<char, int> mNucleotideCounts;
-
-        static const char mThymineKey;
-        static const char mGuanineKey;
-        static const char mCytosineKey;
-        static const char mAdenineKey;
 
         static void validate_nucleotide(const char nucleotid);
         void count_nucleotides(const std::string_view dna);

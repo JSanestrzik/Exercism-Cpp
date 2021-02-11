@@ -1,12 +1,13 @@
 #include "nucleotide_count.h"
 #include <stdexcept>
+#include <algorithm>
 
 namespace nucleotide_count {
 
-    const char counter::mAdenineKey = 'A';
-    const char counter::mThymineKey = 'T';
-    const char counter::mGuanineKey = 'G';
-    const char counter::mCytosineKey = 'C';
+    static const char mAdenineKey = 'A';
+    static const char mThymineKey = 'T';
+    static const char mGuanineKey = 'G';
+    static const char mCytosineKey = 'C';
 
     counter::counter(const std::string_view dna): mNucleotideCounts() {
         std::for_each(dna.begin(), dna.end(), &counter::validate_nucleotide);
@@ -24,10 +25,10 @@ namespace nucleotide_count {
     };
 
     void counter::validate_nucleotide(const char nucleotide) {
-        if (nucleotide != counter::mAdenineKey &&
-            nucleotide != counter::mThymineKey &&
-            nucleotide != counter::mCytosineKey &&
-            nucleotide != counter::mGuanineKey) {
+        if (nucleotide != mAdenineKey &&
+            nucleotide != mThymineKey &&
+            nucleotide != mCytosineKey &&
+            nucleotide != mGuanineKey) {
             throw std::invalid_argument("Invalid nucleotide value");
         }
     };
