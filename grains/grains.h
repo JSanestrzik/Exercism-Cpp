@@ -4,7 +4,6 @@
 #define EXERCISM_RUN_ALL_TESTS
 
 #include <map>
-#include <stdexcept>
 
 namespace grains {
 
