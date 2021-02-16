@@ -1,6 +1,7 @@
 #include "grains.h"
 
 #include <stdexcept>
+#include <cmath>
 
 namespace grains {
 
@@ -12,11 +13,8 @@ namespace grains {
     }
 
     unsigned long long total() {
-        unsigned long long sum = 0;
-        for (int i = 1; i <= 64; i++) {
-            sum += square(i);
-        }
-        return sum;
-    }
+        //sum of a geometric sequence
+        return 1ULL * ((1 - pow(2, 64)) / -1ULL);
+    };
 
 }  // namespace grains
