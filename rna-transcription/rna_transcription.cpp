@@ -24,4 +24,9 @@ namespace rna_transcription {
                 throw std::invalid_argument("Invalid nucleotide value");
         }
     }
+
+    std::string to_rna(std::string dna) {
+        std::transform(dna.begin(), dna.end(), dna.begin(), [](char nucleotide) { return to_rna(nucleotide); });
+        return dna;
+    }
 }  // namespace rna_transcription
