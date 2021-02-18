@@ -2,8 +2,8 @@
 #include <cmath>
 
 namespace difference_of_squares {
-    int square_of_sum(int square) {
-        return pow( ((2 + (square -1)) / 2) * square , 2);
+    int square_of_sum(unsigned int square) {
+        return std::pow( (((2 + (square -1 )) / 2.0) * square), 2);
     }
 
     int sum_of_squares(int square) {
