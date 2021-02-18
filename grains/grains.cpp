@@ -13,8 +13,7 @@ namespace grains {
     }
 
     unsigned long long total() {
-        //sum of a geometric sequence
-        return 1ULL * ((1 - pow(2, 64)) / -1ULL);
-    };
+        return ~0ULL;
+    }
 
 }  // namespace grains

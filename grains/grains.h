@@ -2,7 +2,7 @@
 #define GRAINS_H
 
 #include <map>
-
+#define EXERCISM_RUN_ALL_TESTS
 namespace grains {
 
     unsigned long long square(unsigned field_number);
