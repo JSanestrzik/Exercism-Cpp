@@ -1,5 +1,5 @@
 # Directories
-.exercism/
+#.exercism/
 .idea/
 */cmake-build-debug/
 cmake-build-debug/
