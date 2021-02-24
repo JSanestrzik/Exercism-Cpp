@@ -13,7 +13,7 @@ namespace grains {
     }
 
     unsigned long long total() {
-        return ~0ULL;
+        return ~static_cast<uint64_t>(0);
     }
 
 }  // namespace grains
