@@ -5,7 +5,7 @@
 namespace pangram {
 
     bool is_pangram(std::string val, const std::size_t alphabet_count, const std::locale loc) {
-        if (val.length() == 0) {
+        if (val.length() < alphabet_count) {
             return false;
         }
 
